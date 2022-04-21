@@ -1,5 +1,7 @@
 from books import Books, bookshelf
- 
+
+
+available_genres = ["thriller", "sci fi", "crime"] 
 
 #Building a Tree
 class Tree():
@@ -21,6 +23,7 @@ class Tree():
             
 
 #Adding Tree Nodes
+
 books = Tree("Books")
 genres = []
 scifi = Tree("Sci Fi")
@@ -60,6 +63,7 @@ for book in crime_books:
 
 
 #function for searching a genre in books children
+
 def genre_search(root, genre):
     for child in root.child:
         if child.value == genre:
@@ -67,5 +71,31 @@ def genre_search(root, genre):
             return child.traverse()
 
 
+
 #genre_search(books, "Sci Fi")
 
+#Recommendation with user input
+
+def user_input():
+
+    welcome = input("""Please choose amongst the following genres:\nThriller\nSci Fi\nCrime\n""")
+
+    if welcome.lower() in available_genres:
+        genre_search(books, welcome.title())
+    else:
+        user_input()
+
+    play_again()
+
+def play_again():
+
+    again = input("Do you want recommendations for another genre? Enter \"y\" for \"yes\" or \"n\" for \"no\": " )
+    if again == "y":
+        return user_input()
+    elif again == "n":
+        print("Thank you for using my Book Recommendation! I hope you found something you like.")
+    else:
+        play_again()
+
+print("Welcome to Sonji's Book Recommendation!")
+user_input()
